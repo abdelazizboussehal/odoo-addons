@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="hospital.PatientPoint">
+        <div class="container mt-5">
+            <h2>Records Table</h2>
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Name</th>
+                        <th>Function</th>
+                        <th>Phone</th>
+                        <th>Mobile</th>
+                        <th>Email</th>
+                        <th>User ID</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Country</th>
+                        <th>VAT</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody t-foreach="state.patient_list" t-as="patient" t-key="patient.id">
+                    <tr>
+                        <td t-ref="name_column" t-esc="patient.name"/> <!-- Name -->
+                        <td t-esc="patient.function"/> <!-- Function -->
+                        <td t-esc="patient.phone"/> <!-- Phone -->
+                        <td t-esc="patient.mobile"/> <!-- Mobile -->
+                        <td t-esc="patient.email"/> <!-- Email -->
+                        <td t-esc="patient.user_id.name"/> <!-- User ID (Assuming it's a many2one field, showing the name) -->
+                        <td t-esc="patient.city"/> <!-- City -->
+                        <td t-esc="patient.state_id.name"/> <!-- State (Assuming it's a many2one field, showing the name) -->
+                        <td t-esc="patient.country_id.name"/> <!-- Country (Assuming it's a many2one field, showing the name) -->
+                        <td t-esc="patient.vat"/> <!-- VAT -->
+                        <td>
+                            <button class="btn btn-primary btn-sm" t-on-click="edit">Edit</button>
+                            <button class="btn btn-danger btn-sm" t-on-click="() => this.deletePatient(patient.id)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </t>
+</templates>

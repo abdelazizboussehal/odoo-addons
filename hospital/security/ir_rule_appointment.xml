@@ -1,0 +1,30 @@
+<odoo>
+    <data>
+        <record id="appointment_doctor_access_rule" model="ir.rule">
+            <field name="name">Appointment doctor access rule</field>
+            <field ref="model_hospital_appointment" name="model_id"/>
+            <field name="domain_force">[('doctor_id', '=', user.id)]</field>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <!-- You can attach this rule to a specific group, Or make it Global -->
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+            <!--<field name="global" eval="1"/> -->
+        </record>
+
+        <!--<record id="patient_doctor_access_rule" model="ir.rule">
+            <field name="name">Patient doctor access rule</field>
+            <field ref="model_res_partner" name="model_id"/>
+            <field name="domain_force">[('doctor_id', '=', user.id),('','=','')]</field>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            &lt;!&ndash; You can attach this rule to a specific group, Or make it Global &ndash;&gt;
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+            &lt;!&ndash;<field name="global" eval="1"/> &ndash;&gt;
+        </record>-->
+
+    </data>
+</odoo>

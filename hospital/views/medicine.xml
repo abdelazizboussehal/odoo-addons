@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="medicine_action" model="ir.actions.act_window">
+            <field name="name">medicine action</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hospital.medicine</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="medicine_action_view_form" model="ir.ui.view">
+            <field name="name">medicine_action_view_form</field>
+            <field name="model">hospital.medicine</field>
+            <field name="arch" type="xml">
+                <form string="medicine_action_form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="dosage"/>
+                            <field name="barcode"/>
+                            <field name="avgWeight"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="medicine_view_tree" model="ir.ui.view">
+            <field name="name">medicine_view_tree</field>
+            <field name="model">hospital.medicine</field>
+            <field name="arch" type="xml">
+                <tree string="medicine_tree">
+                    <field name="name"/>
+                    <field name="dosage"/>
+                    <field name="barcode"/>
+                    <field name="avgWeight"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

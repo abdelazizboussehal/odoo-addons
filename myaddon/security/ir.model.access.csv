@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_my.order.user,my.order,model_my_order,myaddon.group_my_addon_user,1,0,0,0
+access_my.order.admin,my.order,model_my_order,myaddon.group_my_addon_admin,1,1,1,1
+access_my.order.line.user,my.order.line,model_my_order_line,myaddon.group_my_addon_user,1,0,0,0
+access_my.order.line.admin,my.order.line,model_my_order_line,myaddon.group_my_addon_admin,1,1,1,1
+access_my.person.user,my.person,model_my_person,myaddon.group_my_addon_user,1,0,0,0
+access_my.person.admin,my.person,model_my_person,myaddon.group_my_addon_admin,1,1,1,1

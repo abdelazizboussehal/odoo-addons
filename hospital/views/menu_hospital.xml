@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem name="hospital" id="hospital_main_menu_id">
+            <menuitem name="person" id="hospital_person_menu_id" >
+                <menuitem name="patients" id="hospital_patients_menu_id" action="action_patient_model" />
+                <menuitem name="doctors"  id="hospital_doctors_menu_id"  action="doctor_act_window" />
+            </menuitem>
+            <menuitem name="transaction" id="hospital_transactions_menu_id" >
+                <menuitem name="appointments"  id="hospital_appointment_menu_id"  action="appointment_action" />
+                <menuitem name="medicine"  id="medicine_appointment_menu_id"  action="medicine_action" />
+            </menuitem>
+            <menuitem name="patient point" id="hospital.patient_point" action="hospital.patient_point_action">
+            </menuitem>
+        </menuitem>
+    </data>
+</odoo>

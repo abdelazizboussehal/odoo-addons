@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+<!-- Inherit Form View to Modify it -->
+        <record id="doctor_form_inherit" model="ir.ui.view">
+            <field name="name">doctor.form</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_simple_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='phone']" position="after">
+                    <!-- Add your fields or attributes here -->
+                    <field name="isDoctor"/>
+                </xpath>
+
+            </field>
+        </record>
+        <record id="doctor_tree_view" model="ir.ui.view">
+            <field name="name">hospital.doctor.tree</field>
+            <field name="model">res.users</field>
+            <field name="arch" type="xml">
+                <tree string="Doctors">
+                    <field name="name"/>
+                    <field name="active"/>
+                    <field name="active_partner"/>
+                    <field name="email" optional="hide"/>
+                    <field name="isDoctor"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="doctor_act_window" model="ir.actions.act_window">
+            <field name="name">doctor</field>
+            <field name="res_model">res.users</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('isDoctor', '=', True)]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Add new Doctor..
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

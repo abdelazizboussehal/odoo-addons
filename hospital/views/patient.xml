@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--owl view-->
+        <record id="hospital.patient_point_action" model="ir.actions.client">
+            <field name="name">Patient Point</field>
+            <field name="tag">hospital.patient_point</field>
+            <!--field name="target">fullscreen</field-->
+        </record>
+        <!-- link action -->
+        <record id="action_patient_list_of_appointments" model="ir.actions.act_window">
+            <field name="name">appointment</field>
+            <field name="res_model">hospital.appointment</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[('patient_id', '=', active_id)]</field>
+        </record>
+
+        <record id="action_patient_model" model="ir.actions.act_window">
+            <field name="name">Patient</field>
+            <field name="res_model">res.partner</field>
+            <field name="domain">[('isPatient','=',True),('doctor_id','=',uid)]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'from_my_menu': False, 'isPatient': True}</field>
+        </record>
+        <record id="res_patient_view_form_simple_modiff" model="ir.ui.view">
+            <field name="name">res.patient.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <!--<xpath expr="//div[hasclass('oe_button_box')]" position="attributes">
+                    <attribute name="invisible">isPatient == True</attribute>
+                </xpath>-->
+                <xpath expr="//div[hasclass('oe_button_box')]//button[1]" position="before">
+                    <!--button name="%(action_patient_list_of_appointments)d" type="action" string="Appointments"/-->
+                    <!--<button name="action_patient_list_of_appointments" type="object" string="Appointments"/>-->
+                    <button name="action_patient_list_of_appointments" type="object"
+                            class="oe_stat_button" icon="fa-user-md">
+                        <div class="o_stat_info">
+                            <span class="o_stat_text">Appointments</span>
+                            <field name="appointment_count" class="o_stat_value"/>
+                        </div>
+                    </button>
+                </xpath>
+                <!--<xpath expr="//div[hasclass('o_row')]" position="after">-->
+                <xpath expr="//form//sheet//div[2]//div" position="after">
+                    <!-- <field  name="isPatient"  invisible="context.get('from_my_menu', True)"></field>-->
+                    <group>
+                        <group>
+                            <field name="isPatient" invisible="is_company"></field>
+                            <field name="dateOfBirth"/>
+                        </group>
+                        <group>
+                            <field name="age" readonly="1" force_save="1"/>
+                            <field name="doctor_id"/>
+                            <field name="phone" widget="hospital_CustomCharField"/>
+                        </group>
+                    </group>
+                </xpath>
+                <xpath expr="//field[@name='company_type']" position="attributes">
+                    <attribute name="invisible">isPatient == True</attribute>
+                </xpath>
+                <xpath expr="//page[@name='sales_purchases']" position="attributes">
+                    <attribute name="invisible">isPatient == True</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="res_patient_view_form_simple_modif" model="ir.ui.view">
+            <field name="name">res.patient.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account.view_partner_property_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='accounting']" position="attributes">
+                    <group>
+                        <attribute name="invisible">isPatient == True</attribute>
+                    </group>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

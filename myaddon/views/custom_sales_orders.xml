@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="custom_sales_order_form_inherit" model="ir.ui.view">
+            <field name="name">custom_sales_order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_stock.view_order_form_inherit_sale_stock"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='effective_date']" position="after">
+                    <field name="shopy_url"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="custom_sales_order_att_form_inherit" model="ir.ui.view">
+            <field name="name">custom_sales_order_att_form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='order_details']" position="attributes">
+                    <attribute name="string">order details</attribute>
+                </xpath>
+                <xpath expr="//group[@name='order_details']" position="attributes">
+                    <attribute name="string">order details</attribute>
+                </xpath>
+
+                <xpath expr="//form//sheet//group//group[2]//field[2]" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </xpath>
+
+                <xpath expr="//form//sheet//group//group[2]//field[2]" position="attributes">
+                    <attribute name="string">aziz</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='pricelist_id']" position="attributes">
+                    <attribute name="string">aziz</attribute>
+                </xpath>
+            </field>
+        </record>
+        <!--custom sales quotation tree/list-->
+         <record id="test_aziz_tree" model="ir.ui.view">
+            <field name="name">test.aziz.tree</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="shopy_url"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,191 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="myaddon.list">
+      <field name="name">myaddon list</field>
+      <field name="model">my.order</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>-->
+
+    <record id="view_my_order_tree" model="ir.ui.view">
+        <field name="name">my.order.tree</field>
+        <field name="model">my.order</field>
+        <field name="arch" type="xml">
+            <tree string="Orders">
+                <field name="name" string="Order Name" widget="many2one_avatar_user" optional="hide"/>
+                <field name="order_date" string="Order Date"/>
+                <field name="total_amount" string="Total Amount" sum="Total of All"/>
+                <field name="selection" string="Selection"/>
+                <field name="quantity" string="Quantity" optional="show" avg="Avg"/>
+                <field name="minus" string="minus Mounder" optional="show"/>
+                <button name="test_icon_bootstrap" string="icon-bootstrap"  icon="fa-bicycle"></button>
+            </tree>
+        </field>
+    </record>
+
+      <record id="view_my_order_tree" model="ir.ui.view">
+        <field name="name">my.order.line.tree</field>
+        <field name="model">my.order.line</field>
+        <field name="arch" type="xml">
+            <tree string="Orders">
+                <field name="quantity" />
+                <field name="unit_price" />
+            </tree>
+        </field>
+    </record>
+
+      <record id="view_my_model_person" model="ir.ui.view">
+          <field name="name">My person</field>
+          <field name="model">my.person</field>
+          <field name="arch" type="xml">
+              <tree string="Your Model List">
+                  <field name="fullname"/>
+                  <field name="email"/>
+                  <field name="phone"/>
+                  <field name="address" optional="hide"/>
+                  <field name="date_of_birth"/>
+                  <field name="age"/>
+              </tree>
+          </field>
+      </record>
+
+
+     <!--Custom form-->
+
+      <record id="view_my_order_from" model="ir.ui.view">
+          <field name="name">my.order.tree</field>
+          <field name="model">my.order</field>
+          <field name="arch" type="xml">
+              <form string="My Orders from">
+                  <header>
+                      <field name="app_barre_status" widget="statusbar"/>
+                      <button name="change_to_completed" string="completed" type="object" invisible = "app_barre_status != 'draft' "></button>
+                      <button name="add_new_order_line" class="btn-success" string="Add Aew Item" type="object" invisible = "app_barre_status == 'draft' "></button>
+                      <button name="empty_quantity" class="btn-warning"  icon="fa-pencil-square " string="Modify Item" type="object" invisible = "app_barre_status == 'draft' "></button>
+                      <button name="remove_all_order_line" class="btn-danger" icon="fa-chain-broken" string="remove all items" type="object" invisible = "app_barre_status == 'draft' "></button>
+                  </header>
+                  <sheet>
+                      <h1 class="text-primary">Order Form</h1>
+                      <hr/>
+                      <h2>
+                          <field name="name" string="Order Name" placeholer="enter the name" default_focus="1"/>
+                      </h2>
+                      <group>
+                          <group>
+                              <field name="order_date" string="Order Date"/>
+                              <field name="total_amount" string="Total Amount"/>
+                          </group>
+
+                          <group>
+                              <field name="selection" string="Selection"/>
+                              <field name="quantity" string="Quantity"/>
+                          </group>
+                          <group>
+                              <field name="html" ></field>
+                          </group>
+                      </group>
+                      <notebook>
+                          <page string="Order Lines" name="order_lines">
+                              <field name="order_line_ids" widget="section_and_note_one2many" mode="tree,kanban">
+                                  <tree>
+                                        <field name="quantity" />
+                                        <field name="unit_price" />
+                                  </tree>
+                              </field>
+                          </page>
+                          <page string="google patent" name="google_patents">
+                              <iframe width="100%" height="600" src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;coord=52.70967533219885, -8.020019531250002&amp;q=1%20Grafton%20Street%2C%20Dublin%2C%20Ireland&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><br />
+                          </page>
+                      </notebook>
+
+                  </sheet>
+              </form>
+          </field>
+      </record>
+
+  <record id="view_my_model_person_form1" model="ir.ui.view">
+          <field name="name">My personn</field>
+          <field name="model">my.person</field>
+          <field name="arch" type="xml">
+              <form>
+                  <sheet>
+                      <h1 class="text-primary">Person Information TEST</h1>
+                      <group>
+                          <field name="fullname" placeholer="enter full name"/>
+                          <field name="email"/>
+                          <field name="phone"/>
+                          <field name="address" optional="hide"/>
+                      </group>
+                      <hr/>
+                      <group>
+                          <field name="date_of_birth"/>
+                          <field name="age" class="text-success"/>
+                      </group>
+                  </sheet>
+                  <div class="oe_chatter">
+                      <!--<field name="message_follower_ids"/>-->
+                      <field name="message_ids"/>
+                      <!--
+                      <field name="activity_ids"/>
+                      -->
+                  </div>
+
+
+              </form>
+
+          </field>
+      </record>
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="myaddon_ma_open_model_main">
+      <field name="name">My Person </field>
+      <field name="res_model">my.person</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="myaddon_ma_open_model_order">
+      <field name="name">Order</field>
+      <field name="res_model">my.order</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="myaddon_ma_open_model_orderline">
+      <field name="name">Order line</field>
+      <field name="res_model">my.order.line</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="myaddon.action_server">
+      <field name="name">myaddon server</field>
+      <field name="model_id" ref="model_myaddon_myaddon"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>-->
+
+    <!-- Top menu item -->
+      <menuitem name="my Addon" id="myaddon_ma_menu_root">
+          <menuitem name="main " id="myaddon_ma_main" action="myaddon_ma_open_model_main"/>
+          <menuitem name="orders" id="myaddon_ma_oders">
+              <menuitem name="order" id="myaddon_ma_oder" action="myaddon_ma_open_model_order"/>
+              <menuitem name="order line" id="myaddon_ma_oder_lines" action="myaddon_ma_open_model_orderline"/>
+          </menuitem>
+      </menuitem>
+  </data>
+</odoo>

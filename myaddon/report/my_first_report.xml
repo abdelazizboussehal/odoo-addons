@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="my_first_report" model="ir.actions.report">
+            <field name="name">My First Report</field>
+            <field name="model">my.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">myaddon.myfirstreport</field>
+            <field name="report_file">myaddon.myfirstreport</field>
+            <field name="print_report_name">'Badge - %s' % (object.name).replace('/', '')</field>
+            <field name="binding_model_id" ref="model_my_order"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="my_first_reportihtml" model="ir.actions.report">
+            <field name="name">My First HTML</field>
+            <field name="model">my.order</field>
+            <field name="report_type">qweb-html</field>
+            <field name="report_name">myaddon.myfirstreport</field>
+            <field name="report_file">myaddon.myfirstreport</field>
+            <field name="print_report_name">'Badge - %s' % (object.name).replace('/', '')</field>
+            <field name="binding_model_id" ref="model_my_order"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <template id="myfirstreport">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="my">
+                    <t t-call="web.basic_layout">
+                        <div class="page">
+                            <h1 class="d-flex justify-content-center .text-primary">My Order </h1>
+                            <div class="container mt-5">
+                                <table class="table table-bordered">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Quantity</th>
+                                            <th>status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><span t-out="my.name"/></td>
+                                            <td><span t-out="my.quantity"/></td>
+                                            <td><span t-out="my.app_barre_status"/></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                                            <!-- Order Lines -->
+            <h4>Order Lines:</h4>
+            <table class="table table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price Unit</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="my.order_line_ids" t-as="line">
+                        <tr>
+                            <td>
+                                <t t-esc="line.id"/>
+                            </td>
+                            <td>
+                                <t t-esc="line.order_id.name"/>
+                            </td>
+                            <td>
+                                <t t-esc="line.quantity"/>
+                            </td>
+                            <td>
+                                <t t-esc="line.unit_price"/>
+                            </td>
+                            <td>
+                                <t t-esc="line.subtotal"/>
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+                            </div>
+
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>
