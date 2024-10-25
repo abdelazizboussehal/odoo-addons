@@ -5,13 +5,16 @@ import {useService} from "@web/core/utils/hooks"
 const {Component, useState, onWillStart, useRef,onMounted, onWillUpdateProps, onWillUnmount,onPatched} = owl;
 
 export class PatientPoint extends Component {
-    elemnTh = useRef('name_column');
-
+    rowRef = useRef("row_name");
+    modalRef = useRef("modalEdit");
     setup() {
         this.orm = useService('orm');
         this.model = 'res.partner';
 
-        this.state = useState({'patient_list': []});
+        this.state = useState({'patient_list': [],
+        'current_edit':0
+
+        });
         //this.state = {'patient_list': []};
 
         onWillStart(async () => {
@@ -51,9 +54,18 @@ export class PatientPoint extends Component {
 
     }
 
-    edit() {
-        this.elemnTh.el.className='text-primary'
-        this.state.patient_list[0].name=`${this.state.patient_list[0].name} 1`;
+    edit(rowIndex) {
+        /*this.rowRef.el.children[rowIndex].children[0].className='text-primary'
+        debugger;*/
+        this.state.current_edit=rowIndex;
+        //this.state.patient_list[patientid].name=`${this.state.patient_list[patientid].name} ~`;
+    }
+
+     async confirm() {
+         await this.orm.write(this.model, [this.state.patient_list[this.state.current_edit].id], this.state.patient_list[this.state.current_edit]);
+         this.rowRef.el.children[this.state.current_edit].children[0].className = 'text-success';
+         await this.getAllPatients();
+         $('#editPatientModal').modal('hide');
     }
 
     // add consultation price
