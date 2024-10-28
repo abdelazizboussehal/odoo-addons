@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+    <t t-name="hospital.custom_kanban_sidebar_template" t-inherit="web.KanbanView">
+        <xpath expr="//Layout/t[@t-component='props.Renderer']" position="before">
+
+            <div class="d-flex flex-column flex-shrink-0 p-3 bg-light">
+                <ul class="nav nav-pills flex-column mb-auto ">
+                    <div class="d-flex flex-row m-2 l-auto w-full"  t-foreach="constomLocation" t-as="cust" t-key="cust.state_id[0]" >
+<!--
+                        <li class="nav-item">
+                            <span t-esc="cust.state_id[1]" ></span>
+                        </li>-->
+                    <button type="button" class="btn btn-primary position-relative" >
+                        <span t-esc="cust.state_id[1]"></span>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" >
+                            <span t-esc="cust.state_id_count"></span>
+                            <span class="visually-hidden">unread messages</span></span></button>
+                    </div>
+
+                </ul>
+            </div>
+        </xpath>
+
+        <xpath expr="//Layout" position="attributes">
+            <attribute name="className">model.useSampleModel ? 'o_view_sample_data' : '' + " d-flex"</attribute>
+        </xpath>
+
+    </t>
+</templates>

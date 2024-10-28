@@ -29,6 +29,7 @@ Long description of module's purpose
         'views/doctor.xml',
         'views/appointment.xml',
         'views/medicine.xml',
+        'views/custom_kanban_sidebar.xml',
         'report/report.xml',
         'views/menu_hospital.xml',
     ],
