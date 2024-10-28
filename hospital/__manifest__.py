@@ -24,6 +24,7 @@ Long description of module's purpose
     'data': [
         'security/ir.model.access.csv',
         'security/ir_rule_appointment.xml',
+        'wizards/add_appointment.xml',
         'views/patient.xml',
         'views/doctor.xml',
         'views/appointment.xml',

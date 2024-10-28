@@ -12,6 +12,8 @@
             </menuitem>
             <menuitem name="patient point" id="hospital.patient_point" action="hospital.patient_point_action">
             </menuitem>
+            <menuitem name="popup" id="hospital.patient_popup" action="hospital.add_appointment_wizard">
+            </menuitem>
         </menuitem>
     </data>
 </odoo>
